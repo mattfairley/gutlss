@@ -1,0 +1,41 @@
+.wrapper {
+	margin: 0 32px;
+}
+
+body {
+	font-size: 16px;
+	color: #333;
+	font-family: 'Noto Sans', serif;
+}
+
+.field {
+	padding: 16px 0;
+}
+
+input[type="text"] {
+	padding: 8px;
+	font-size: 16px;
+	font-family: 'Noto Sans', serif;
+}
+
+select {
+	font-size: 16px;
+	font-family: 'Noto Sans', serif;
+}
+
+label {
+	display: block;
+	margin-bottom: 16px;
+}
+
+button {
+	background: dodgerblue;
+	color: #eee;
+	font-size: 16px;
+	border: 0;
+	padding: 12px 16px;
+}
+
+.status {
+	color: forestgreen;
+}

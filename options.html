@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Options</title>
+	<link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700" rel="stylesheet">
+	<link rel="stylesheet" href="options.css">
+</head>
+<body>
+	<div class="wrapper">
+		<h1>Options</h1>
+		<div class="field">
+			<label for="name">What is this deadbeat's name?</label>
+			<input type="text" id="name" name="name">
+		</div>
+		<div class="field">
+			<label for="problem">What even is this asshole's problem?</label>
+			<select id="problem">
+				<option value="weed">Smokes too much weed</option>
+				<option value="unemployed">Needs to get a job</option>
+				<option value="nodishes">Won't do their goddamn dishes</option>
+				<option value="everything">Literally everything</option>
+			</select>
+		</div>
+		<div class="field">
+			<label for="level">How subtle?</label>
+			<select id="level">
+				<option value="low">They'll figure it out</option>
+				<option value="medium">Needs more of a push</option>
+				<option value="high">Stop it already</option>
+			</select>
+		</div>
+		<div class="field">
+			<button id="save">Save</button>
+		</div>
+		<div id="status" class="status"></div>
+	</div>
+
+	<script src="options.js"></script>
+</body>
+</html>
