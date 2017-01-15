@@ -1,8 +1,8 @@
 var templates = {
   weed: [' {{NAME}}, I think you should cut down on the weed.'],
-  unemployed: [' {{NAME}}, please get a job - your mother and I are worried.', ' Hey {{NAME}}, get a job.', ' Random placeholder.'],
-  nodishes: [' And {{NAME}}, would it kill you to do the dishes every once in a while?'],
-  everything: [' Get your shit together.'],
+  unemployed: [' Hey {{NAME}}, get a job.', ' {{NAME}}, please get a job.', ' Maybe it\'s time to go back to school and get a useful degree, {{NAME}}.'],
+  nodishes: [' And {{NAME}}, would it kill you to do the dishes every once in a while?', ' Don\'t forget to do your dishes.'],
+  everything: [' Get your shit together.', ' Get your shit together.', ' Get your shit together.'],
 };
 
 function getMessage(type, name) {
@@ -45,11 +45,13 @@ function getSelector(site) {
     case 'theringer': {
       return {
         selector: '.graf--p',
+        index: 0,
       };
     }
     case 'polygon': {
       return {
         selector: '.c-entry-content p',
+        index: 0,
       };
     }
     case 'vice': {
@@ -63,8 +65,18 @@ function getSelector(site) {
         index: 1,
       }
     }
-    default: return;
+    default: return { selector: 'p' };
   }
+}
+
+function createContentElement(type, styles) {
+  var content = document.createElement(type);
+  if (styles) {
+    for (var styleRule in styles) {
+      content.style[styleRule] = styles[styleRule];
+    }
+  }
+  return content;
 }
 
 function displayText(result) {
@@ -74,17 +86,13 @@ function displayText(result) {
   if (!selector) return;
   selector = selector || 'p';
   elementType = elementType || 'span';
-  index = index || Math.floor(Math.random() * 3) + 1;
+  index = index || 0;
   var elementArray = document.querySelectorAll(selector);
-  var content = document.createElement(elementType);
-  if (styles) {
-    for (var styleRule in styles) {
-      content.style[styleRule] = styles[styleRule];
-    }
-  }
+  var content = createContentElement(elementType, styles);
+  
   if (result.level === 'high') {
-    message = getMessage(result.problem, result.userName).trim();
-    const messageArray = message.split(' ');
+    message = getMessage(result.problem, result.userName);
+    const messageArray = message.trim().split(' ');
     let count = 0;
     Array.prototype.slice.call(elementArray).forEach(function(el) {
       const newText = el.textContent.split(' ').map((text) => {
@@ -94,6 +102,16 @@ function displayText(result) {
       }).join(' ');
       el.textContent = newText;
     });
+  } else if (result.level === 'medium') {
+    var messages = templates[result.problem].map(m => m.replace('{{NAME}}', result.userName));
+    content.innerHTML = messages[0];
+    var content2 = createContentElement(elementType, styles);
+    content2.innerHTML = messages[1];
+    var content3 = createContentElement(elementType, styles);
+    content3.innerHTML = messages[2];
+    elementArray[1].appendChild(content);
+    elementArray[3].appendChild(content2);
+    elementArray[5].appendChild(content3);
   } else if (elementArray[index]) {
     content.innerHTML = getMessage(result.problem, result.userName);
     elementArray[index].appendChild(content);
