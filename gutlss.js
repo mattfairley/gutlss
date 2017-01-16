@@ -1,8 +1,24 @@
 var templates = {
-  weed: [' {{NAME}}, I think you should cut down on the weed.'],
-  unemployed: [' Hey {{NAME}}, get a job.', ' {{NAME}}, please get a job.', ' Maybe it\'s time to go back to school and get a useful degree, {{NAME}}.'],
-  nodishes: [' And {{NAME}}, would it kill you to do the dishes every once in a while?', ' Don\'t forget to do your dishes.'],
-  everything: [' Get your shit together.', ' Get your shit together.', ' Get your shit together.'],
+  weed: [
+    ' {{NAME}}, I think you should cut down on the weed.',
+    ' {{NAME}}, I think you should cut down on the weed.',
+    ' {{NAME}}, I think you should cut down on the weed.'
+  ],
+  unemployed: [
+    ' {{NAME}}, please get a job.',
+    ' Hey {{NAME}}, time to get a job.',
+    ' Maybe it\'s time to go back to school and get a useful degree, {{NAME}}.'
+  ],
+  nodishes: [
+    ' And {{NAME}}, would it kill you to do the dishes every once in a while?',
+    ' Don\'t forget to do your dishes.',
+    ' There are a lot of dishes in that sink, huh?',
+  ],
+  everything: [
+    ' Get your shit together.',
+    ' Get your shit together.',
+    ' Get your shit together.'
+  ],
 };
 
 function getMessage(type, name) {
@@ -21,10 +37,10 @@ function getSelector(site) {
     }
     case 'cbc': {
       return {
-        selector: '.story-body .story-content ul',
+        selector: '.story-body .story-content p',
         index: 0,
-        elementType: 'li',
-        styles: { color: '#115278' , 'font-weight': 700 },
+        // elementType: 'li',
+        // styles: { color: '#115278' , 'font-weight': 700 },
       };
     }
     case 'sportsnet': {
@@ -118,4 +134,6 @@ function displayText(result) {
   }
 }
 
-chrome.storage.sync.get(['userName', 'problem', 'level'], displayText);
+window.setTimeout(() => {
+  chrome.storage.sync.get(['userName', 'problem', 'level'], displayText);
+}, 100);

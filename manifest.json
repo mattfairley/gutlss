@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "Gutlss",
-  "description": "This extension passive-aggressively inserts messages in news stories for your deadbeat roommate to see and re-evaluate their life choices",
+  "description": "A passive aggressive tool that lets the internet say what you're too cowardly to say yourself",
   "version": "1.0",
   "options_page": "options.html",
   "content_scripts": [
@@ -14,7 +14,7 @@
       "js": ["gutlss.js"]
     }
   ],
-
+  "icons": { "128": "icon128.png" },
   "permissions": [
     "activeTab",
     "http://*/*",
